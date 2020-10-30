@@ -6,6 +6,36 @@
 
 <p><%= article.content %></p>
 
+<form action="/articles/:id/comments" method="POST">
+  <div class="form-group">
+    <label for="commentName">Comment Name</label>
+    <input type="text" class="form-control" id="commentName" name="commentName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="commentContent">Comment Content</label>
+    <textarea type="text" class="form-control" id="commentContent" name="commentContent" required></textarea>
+  </div>
+
+  <input type="hidden" name="articleId" value="<%= article.id %>">
+
+  <input type="submit" class="btn btn-primary">
+</form>
+
+<% article.comments.forEach(function(c) { %>
+  <div class="well">
+    <h2>
+      <small>by <%= c.name %></small>
+    </h2>
+    <p>
+      <%= c.content %>
+    </p>
+    <p>
+      <strong><%= moment(c.createdAt).calendar() %></strong>
+    </p>
+  </div>
+<% }) %>
+
 <hr />
 
 <a href="/">&larr; Back Home</a>
